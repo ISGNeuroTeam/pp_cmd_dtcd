@@ -11,10 +11,8 @@ class DtcdGraphConnector:
         return graphs
 
     def get_graph_by_id(self, id: str):
-        print('id=')
-        print(id)
         graph_dict = self._complex_rest_connector.get(f'supergraph/v1/fragments/{id}/graph')
-        return graph_dict
+        return graph_dict['graph']
 
     def get_graph(self, name: str, id_part: str = None):
         """
@@ -23,7 +21,6 @@ class DtcdGraphConnector:
              id_part - part of id if several graph with given name exists
         """
         graphs = self.get_graph_list()
-        print(graphs)
         graphs = list(
             filter(
                 lambda graph_dict: graph_dict['name'] == name, graphs
