@@ -21,10 +21,11 @@ class DtcdReadGraphCommand(BaseCommand):
 
     def _transform_node_dict_to_df_dict(self, node_dict: dict, edges: dict):
         node_id = node_dict['primitiveID']
+        init_ports_dict = node_dict['initPorts'] if 'initPorts' in node_dict else []
         res = (
             node_id,
             node_dict['primitiveName'],
-            self._transform_port_dict_to_df_dict(node_dict['initPorts']),
+            self._transform_port_dict_to_df_dict(init_ports_dict),
             self._transform_source_node_edges_dict_to_df_dict(node_id, edges),
             self._transform_target_node_edges_dict_to_df_dict(node_id, edges),
             self._transform_prop_dict_to_df_dict(node_dict['properties']),
